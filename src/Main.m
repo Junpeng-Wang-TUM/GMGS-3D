@@ -87,8 +87,8 @@ disp(['Initializing Solver Totally Costs : ' sprintf('%10.3g',toc(tStart)) 's'])
 %%5. Solving
 tStart = tic;
 U_ = CG_solver(@AtX, @Vcycle, F_, tol_, maxIT_, 'printP_ON');
-disp(['Solving Linear System costs: ' sprintf('%10.3g',toc(tStart)) 's']);	
+disp(['Solving Linear System Costs: ' sprintf('%10.3g',toc(tStart)) 's']);	
 
 %%5. Show deformation
 totDis = vecnorm(reshape(U_,3,numel(U_)/3)',2,2);
-VisScalarField(totDis, []);
+VisScalarField(totDis, 0);
