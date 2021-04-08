@@ -1,4 +1,5 @@
 %% ----GMGS-3D----
+%% A Geometric Multigrid Solver for Large-scale Static Finite Element Simulation on 3D Cartesian Mesh 
 %% Author: Junpeng Wang  
 %% Copyright (c) All rights reserved.
 %% Create date:	08.04.2021
