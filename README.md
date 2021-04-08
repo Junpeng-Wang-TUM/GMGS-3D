@@ -2,8 +2,8 @@
 A Geometric Multigrid Solver (GMGS) for Large-scale Static Finite Element Simulation on 3D Cartesian Mesh 
 
 # Target
-"GMGS-3D" is designed to generate the high-resolution data sets of vector or 2nd-order tensor field for academic use, 
-e.g., displacement field, stress field, etc.
+Out of academic use, "GMGS-3D" is designed to generate the high-resolution data sets of vector (displacement) or 
+2nd-order tensor (stress) field with the normal PC within an affordable time.
 
 # Design description
 "GMGS-3D" proceeds the static Finite Element Analysis (FEA) for solid objects discretized into Cartesian mesh, where,
@@ -18,7 +18,7 @@ look much into it, given his limited experience in that area, and the specific d
 performance are highly welcomed.
 
 # Statistics
-Experiment Environment: A desktop equipped with Intel Core i7-7700k and 32GB RAM
+Experiment Environment: A desktop equipped with Intel(@) Core i7-7700k and 32GB RAM
 
 	# Example 1: kitten
 		Resolutions			DOFs			Time Costs (min)
