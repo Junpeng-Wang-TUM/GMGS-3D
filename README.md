@@ -19,10 +19,11 @@ performance are highly welcomed.
 
 # Statistics
 Experiment Environment: A desktop equipped with Intel Core i7-7700k and 32GB RAM
-@Example 1: kitten
-	Resolutions			DOFs			Time Costs (min)
+
+	# Example 1: kitten
+		Resolutions			DOFs			Time Costs (min)
 	
 
 
-@Example 2: parts
-	Resolutions			DOFs			Time Costs (min)
+	# Example 2: parts
+		Resolutions			DOFs			Time Costs (min)
