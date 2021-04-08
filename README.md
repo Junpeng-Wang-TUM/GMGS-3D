@@ -8,8 +8,9 @@ e.g., displacement field, stress field, etc.
 # Design description
 "GMGS-3D" proceeds the static Finite Element Analysis (FEA) for solid objects discretized into Cartesian mesh, where,
 	1) an element index based data structure is used to store the FEA stiffness matrix;
-	2) combined with the Jacobian smoother, a Geometric Multigrid based V-cycle is built on the Cartesian mesh
-	3) the FEA equation is iteratively solved by Conjugate Gradient Method preconditioned with V-cycle
+	2) combined with the Jacobian smoother, a Geometric Multigrid based V-cycle is built on the Cartesian mesh;
+	3) the FEA equation is iteratively solved by Conjugate Gradient Method preconditioned with V-cycle;
+	4) besides the displacement vector field, the stress tensor field also can be computed.
 	
 # Limitations
 Geometric Multigrid method can go well with some hardware accelerating techniques, yet in this program, the author didn't 
@@ -18,10 +19,10 @@ performance are highly welcomed.
 
 # Statistics
 Experiment Environment: A desktop equipped with Intel Core i7-7700k and 32GB RAM
-Example 1: kitten
+@Example 1: kitten
 	Resolutions			DOFs			Time Costs (min)
 	
 
 
-Example 2: parts
+@Example 2: parts
 	Resolutions			DOFs			Time Costs (min)
