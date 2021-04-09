@@ -9,14 +9,10 @@ function x = CG_solver(AtX, PtV, b, tol, maxIT_, printP)
 	normB = norm(b);
 	its = 0;
 	x = zeros(n,1);
-	r1 = zeros(n,1);
+	r1 = b - AtX(x);
 	z1 = zeros(n,1);
 	p2 = zeros(n,1);
 	
-	r1 = b - AtX(x);
-	if norm(r1)/normB <= tol
-		x = b; disp('The right hand side vector b is approximately 0, so x=b.'); return;
-	end	
 	tStart0 = tic;
 	while its <= maxIT_
 		var = struct('x', 0, 'r', 0); var.x = x; var.r = r1;
