@@ -27,7 +27,7 @@ function hd = VisSurfaceMesh(iMesh)
 		error('Wrong type of input mesh!');
 	end
 	hd = patch(xPatchs, yPatchs, zPatchs, cPatchs);
-	set(hd, 'FaceColor', [65 174 118]/255, 'FaceAlpha', 1, 'EdgeColor', 'k');	
+	set(hd, 'FaceColor', [65 174 118]/255, 'FaceAlpha', 1, 'EdgeColor', 'None');	
 	camproj('perspective');
 	axis('on'); axis('equal'); axis('tight');
 	[az, el] = view(3); 
