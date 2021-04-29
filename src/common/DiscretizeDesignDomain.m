@@ -2,6 +2,7 @@ function DiscretizeDesignDomain()
 	global nelx_; global nely_; global nelz_;
 	global boundingBox_;
 	global voxelizedVolume_; 
+	global characteristicSize_;
 	global meshHierarchy_;
 	global nodeCoords_;
 	global coarsestResolutionControl_;
@@ -47,15 +48,25 @@ function DiscretizeDesignDomain()
 	if adjustedNelz>nelz_
 		voxelizedVolume_(:,:,end+1:adjustedNelz) = zeros(adjustedNely,adjustedNelx,adjustedNelz-nelz_,'int32');
 	end
+
+	%%2. initialize characteristic size
+	boundingBox_(1,:) = [0 0 0]; 
+	boundingBox_(2,:) = boundingBox_(1,:)+[nelx_ nely_ nelz_];
+	if ~isempty(characteristicSize_)
+		boundingBox_(2,:) = boundingBox_(1,:) + (boundingBox_(2,:)-boundingBox_(1,:))/ ...
+			max(boundingBox_(2,:)-boundingBox_(1,:)) * characteristicSize_;
+	end
+	boundingBox_(2,:) = boundingBox_(1,:) + (boundingBox_(2,:)-boundingBox_(1,:)).* ...
+		[adjustedNelx adjustedNely adjustedNelz]./[nelx_ nely_ nelz_];
 	
-	%%2. initialize the finest mesh
+	%%3. initialize the finest mesh
 	meshHierarchy_ = MeshStruct();
 	meshHierarchy_.resX = adjustedNelx; nx = meshHierarchy_.resX;
 	meshHierarchy_.resY = adjustedNely; ny = meshHierarchy_.resY;
 	meshHierarchy_.resZ = adjustedNelz; nz = meshHierarchy_.resZ;
 	meshHierarchy_.eleSize = [boundingBox_(2,:) - boundingBox_(1,:)] ./ [nx ny nz];
 
-	%%3. identify solid&void elements
+	%%4. identify solid&void elements
 	meshHierarchy_.eleMapBack = find(1==voxelizedVolume_);
 	meshHierarchy_.eleMapBack = int32(meshHierarchy_.eleMapBack);
 	meshHierarchy_.numElements = length(meshHierarchy_.eleMapBack);
@@ -63,7 +74,7 @@ function DiscretizeDesignDomain()
 	meshHierarchy_.eleMapForward(meshHierarchy_.eleMapBack) = (1:meshHierarchy_.numElements)';
 	meshHierarchy_.eleMapForward = int32(meshHierarchy_.eleMapForward);
 		
-	%%4. discretize
+	%%5. discretize
 	nodenrs = reshape(1:(nx+1)*(ny+1)*(nz+1), 1+ny, 1+nx, 1+nz); nodenrs = int32(nodenrs);
 	eNodVec = reshape(nodenrs(1:end-1,1:end-1,1:end-1)+1, nx*ny*nz, 1);
 	eNodMatTemp_ = repmat(eNodVec,1,8);
@@ -90,7 +101,7 @@ function DiscretizeDesignDomain()
 	nodeCoords_(:,2) = repmat(repmat(ySeed,1,nx+1)', (nz+1), 1);
 	nodeCoords_(:,3) = reshape(repmat(zSeed,(nx+1)*(ny+1),1), (nx+1)*(ny+1)*(nz+1), 1);	
 	
-	%%5. identify boundary info.
+	%%6. identify boundary info.
 	numNod2ElesVec_ = zeros(meshHierarchy_.numNodes,1);
 	for ii=1:meshHierarchy_.numElements
 		iNodes = eNodMat(ii,:);
@@ -106,7 +117,7 @@ function DiscretizeDesignDomain()
 	end
 	meshHierarchy_.elementsOnBoundary = int32(find(tmp>0));
 	
-	%%6. update to mesh struct
+	%%7. update to mesh struct
 	meshHierarchy_.eNodMat = eNodMat;
 	boundaryNodeCoords_ = nodeCoords_(meshHierarchy_.nodMapBack(meshHierarchy_(1).nodesOnBoundary),:);
 end

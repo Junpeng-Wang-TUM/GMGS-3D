@@ -139,9 +139,6 @@ function BuildingMeshHierarchy()
 		end
 		meshHierarchy_(ii).elementsOnBoundary = int32(find(tmp>0));
 		meshHierarchy_(ii).eNodMat = eNodMat; clear eNodMat;
-		if meshHierarchy_(ii).numElements<coarsestResolutionControl_
-			numLevels_ = length(meshHierarchy_); break;
-		end
 	end	
 	clear -global eNodMatTemp_
 end

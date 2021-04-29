@@ -1,10 +1,8 @@
 function [nx, ny, nz, formatedTriMesh] = AdaptData4Voxelize(maxRes)
 	global surfTriMeshStruct_;
-	global boundingBox_;
 
 	%identify the bounding box	
-	boundingBox_ = [min(surfTriMeshStruct_.nodeCoords,[],1); max(surfTriMeshStruct_.nodeCoords,[],1)];
-	maxDimensions = boundingBox_(2,:) - boundingBox_(1,:);
+	maxDimensions = max(surfTriMeshStruct_.nodeCoords,[],1) - min(surfTriMeshStruct_.nodeCoords,[],1);
 	dimensionResolutions = round(maxRes*(maxDimensions/max(maxDimensions)));
 	nx = dimensionResolutions(1);
 	ny = dimensionResolutions(2);
