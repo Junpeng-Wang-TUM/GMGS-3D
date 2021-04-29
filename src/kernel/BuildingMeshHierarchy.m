@@ -144,14 +144,4 @@ function BuildingMeshHierarchy()
 		end
 	end	
 	clear -global eNodMatTemp_
-% 	if numLevels_>2
-% 		for ii=numLevels_:-1:1
-% 			if meshHierarchy_(ii).numElements>coarsestResolutionControl_
-% 				climactericRes = ii+1; break;
-% 			end
-% 		end
-% 		climactericRes
-% 		meshHierarchy_(climactericRes:end) = [];
-% 		numLevels_ = length(meshHierarchy_);
-% 	end
 end
