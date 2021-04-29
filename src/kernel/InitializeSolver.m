@@ -16,7 +16,7 @@ function InitializeSolver()
 	
 	%%2. Building Mesh Hierarchy
 	BuildingMeshHierarchy();
-	if numLevels_<2
+	if numLevels_<2 
 		error('There is no sufficient resolution to invoke GMGS!');
 	end
 

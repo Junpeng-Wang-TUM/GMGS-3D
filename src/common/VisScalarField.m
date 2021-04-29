@@ -1,30 +1,29 @@
-function VisScalarField(scalarField, scalingFactor)
+function VisScalarField(scalarField, varargin)
 	global meshHierarchy_;
 	global U_;
 	global nodeCoords_;
-	global domainUpperBound_; global domainLowerBound_;	
+	global boundingBox_;
 	
-	if isempty(scalingFactor)
-		minFeaterSize = min(domainUpperBound_-domainLowerBound_); selfFac = 10;
-		scalingFactor = minFeaterSize/selfFac/max(U_);
-	end	
+	if 1==nargin
+		minFeaterSize = min(boundingBox_(2,:)-boundingBox_(1,:)); selfFac = 10;
+		scalingFactor = minFeaterSize/selfFac/max(U_);		
+	elseif 2==nargin
+		scalingFactor = varargin{1};
+	else
+		error('Wrong Input!');
+	end
 	deformation = U_ * scalingFactor;
 	numElesOnBound = numel(meshHierarchy_(1).elementsOnBoundary);
-	patchIndices = zeros(4,6*numElesOnBound);
-	mapEle2patch = [4 3 2 1; 5 6 7 8; 1 2 6 5; 8 7 3 4; 5 8 4 1; 2 3 7 6]';
-	for ii=1:1:numElesOnBound
-		index = (ii-1)*6;
-		iEleVtx = meshHierarchy_(1).eNodMat(...
-			meshHierarchy_(1).elementsOnBoundary(ii),:)';
-		patchIndices(:,index+1:index+6) = iEleVtx(mapEle2patch);
-	end
+	patchIndices = meshHierarchy_(1).eNodMat(meshHierarchy_(1).elementsOnBoundary,[4 3 2 1  5 6 7 8  1 2 6 5  8 7 3 4  5 8 4 1  2 3 7 6])';
+	patchIndices = reshape(patchIndices(:), 4, 6*numElesOnBound);		
+	
 	allNodes = zeros(meshHierarchy_(1).numNodes,1);
 	allNodes(meshHierarchy_(1).nodesOnBoundary) = 1;
 	allNodes = allNodes(patchIndices');
 	allNodes = sum(allNodes,2);
 	patchIndices = patchIndices(:,find(4==allNodes)');					
 	deformation = reshape(deformation, 3, meshHierarchy_(1).numNodes)';
-	deformedCartesianGrid = nodeCoords_(meshHierarchy_(1).solidNodesMapVec,:) + deformation;
+	deformedCartesianGrid = nodeCoords_(meshHierarchy_(1).nodMapBack,:) + deformation;
 	xPatchs = deformedCartesianGrid(:,1); xPatchs = xPatchs(patchIndices);
 	yPatchs = deformedCartesianGrid(:,2); yPatchs = yPatchs(patchIndices);
 	zPatchs = deformedCartesianGrid(:,3); zPatchs = zPatchs(patchIndices);

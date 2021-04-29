@@ -1,10 +1,13 @@
-function ComputeCartesianStress()
-	%% sigma_x, sigma_y, sigma_z, tadisyz, tadiszx, tadisxy (3D) 
+function GetCartesianStress()	
+	%% stress tensor = [Sigma_xx, Sigma_yy, Sigma_zz, Sigma_yz, Sigma_zx, Sigma_xy];
 	global U_;
-	global cartesianStressField_;
 	global nodeCoords_; global meshHierarchy_;	
-	global numNod2ElesVec_;
-	
+	global numNod2ElesVec_;	
+	global cartesianStressField_;	
+	if isempty(U_)
+		warning('No Deformation Field Available, Please Compute Deformation First by running FUNCTION GetDeformation!'); return;
+	end
+
 	numNode = 8;
 	numNodeDOFs = 3;
 	numStressComponents =6;
@@ -17,16 +20,15 @@ function ComputeCartesianStress()
 	N = ShapeFunction(s, t, p);
 	dShape = DeShapeFunction(s,t,p);
 	eleD = ElementElasticityMatrix();	
-	invJ = HDSparseMatStruct(numNodeDOFs*numGIPs, numNodeDOFs*numGIPs);
-	
+	invJ = zeros(numNodeDOFs*numGIPs, numNodeDOFs*numGIPs);
 	iNode = meshHierarchy_(1).eNodMat(1,:)';
-	iNode = meshHierarchy_(1).solidNodesMapVec(iNode);			
-	relativeNodCoord = nodeCoords_(iNode,:);		
+	iNode = meshHierarchy_(1).nodMapBack(iNode);			
+	probeEleNods = nodeCoords_(iNode,:);		
 	for jj=1:numGIPs
-		[~, invJ.SPmat(numNodeDOFs*(jj-1)+1:numNodeDOFs*jj, numNodeDOFs*(jj-1)+1:numNodeDOFs*jj)] = ...
-			JacobianMat(dShape(numNodeDOFs*(jj-1)+1:numNodeDOFs*jj,:), relativeNodCoord);			
+		jacMat = dShape(numNodeDOFs*(jj-1)+1:numNodeDOFs*jj,:)*probeEleNods;
+		invJ(numNodeDOFs*(jj-1)+1:numNodeDOFs*jj, numNodeDOFs*(jj-1)+1:numNodeDOFs*jj) = inv(jacMat);
 	end
-	eleB = ElementStrainMatrix(dShape, invJ.SPmat);
+	eleB = ElementStrainMatrix(dShape, invJ);
 	for ii=1:meshHierarchy_(1).numElements
 		relativeDOFsIndex = meshHierarchy_(1).eDofMat(ii,:);
 		u = U_(relativeDOFsIndex,1);
@@ -36,7 +38,7 @@ function ComputeCartesianStress()
 		relativeNodesIndex = meshHierarchy_(1).eNodMat(ii,:);
 		cartesianStressField_(relativeNodesIndex,:) = midVar + cartesianStressField_(relativeNodesIndex,:);
 	end
-	cartesianStressField_ = cartesianStressField_./numNod2ElesVec_;
+	cartesianStressField_ = cartesianStressField_./numNod2ElesVec_;	
 end
 
 function outerInterpolationMatrix = OuterInterpolationMat()

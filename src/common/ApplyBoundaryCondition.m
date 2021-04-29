@@ -8,6 +8,8 @@ function ApplyBoundaryCondition()
 	if size(loadingCond_,1)>0
 		F_(loadingCond_(:,1),:) = loadingCond_(:,2:4);
 		F_ = reshape(F_',meshHierarchy_(1).numDOFs,1);
+	else
+		warning('No Loads! Unable to Perform Static FEA!'); return;
 	end
 	if length(fixingCond_)>0
 		fixedDOFs = 3*int32(fixingCond_);
@@ -16,5 +18,7 @@ function ApplyBoundaryCondition()
 		freeDOFs = setdiff((1:int32(meshHierarchy_(1).numDOFs))',fixedDOFs);
 		meshHierarchy_(1).fixedDOFs = fixedDOFs;
 		meshHierarchy_(1).freeDOFs = freeDOFs;
+	else
+		warning('No Constraints! Unable to Perform Static FEA!'); return;
 	end	
 end

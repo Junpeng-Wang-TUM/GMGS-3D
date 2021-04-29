@@ -1,6 +1,7 @@
 function voxelizedVolume = CreateVoxilizedModel(varargin)
 	%%exp 1 --- CreateVoxilizedModel(triFaceModelFile, finestResCtrl)
 	%%exp 2 --- CreateVoxilizedModel(nx, ny, nz)
+	global boundingBox_;
 	global nelx_;
 	global nely_;
 	global nelz_;
@@ -18,6 +19,7 @@ function voxelizedVolume = CreateVoxilizedModel(varargin)
 			nely_ = varargin{2};
 			nelz_ = varargin{3};
 			voxelizedVolume = ones(nely_, nelx_, nelz_);
+			boundingBox_ = [0 0 0; nelx_ nely_ nelz_];
 		otherwise
 			error('Wrong input for voxelization!');
 	end
