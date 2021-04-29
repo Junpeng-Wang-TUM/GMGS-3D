@@ -35,8 +35,8 @@ function VisScalarField(scalarField, varargin)
 	colormap('jet');
 	set(hd, 'FaceColor', 'interp', 'FaceAlpha', 1, 'EdgeColor', 'none');
 	h = colorbar; t=get(h,'Limits'); 
-	set(h,'Ticks',linspace(t(1),t(2),5),'AxisLocation','out');	
-	L=cellfun(@(x)sprintf('%.2e',x),num2cell(linspace(t(1),t(2),5)),'Un',0); 
+	set(h,'Ticks',linspace(t(1),t(2),7),'AxisLocation','out');	
+	L=cellfun(@(x)sprintf('%.2e',x),num2cell(linspace(t(1),t(2),7)),'Un',0); 
 	set(h,'xticklabel',L);		
 	axis(axHandle, 'off'); axis(axHandle, 'equal'); axis(axHandle, 'tight');
 	set(axHandle, 'FontName', 'Times New Roman', 'FontSize', 20);		
