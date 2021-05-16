@@ -1,7 +1,6 @@
 function ShowFixingCondition(varargin)
 	global nodeCoords_;
 	global meshHierarchy_;
-	global boundaryNodeCoords_;
 	global fixingCond_;
 	if 0==nargin
 		fixingCondToBeShow = fixingCond_;
