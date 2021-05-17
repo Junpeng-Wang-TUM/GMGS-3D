@@ -1,4 +1,4 @@
-function Ke = InitializeElementStiffnessMatrix()
+function Ke = SetupStiffnessMatrix()
 	global meshHierarchy_;
 	global nodeCoords_;
 	[s, t, p, w] = GaussianIntegral();

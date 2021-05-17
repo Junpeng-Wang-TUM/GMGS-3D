@@ -9,7 +9,7 @@ function GetDeformation()
 	
 	%%2. Initializing Solver
 	tStart = tic;
-	InitializeSolver();
+	SetupSolver();
 	disp(['Initializing Solver Totally Costs : ' sprintf('%10.3g',toc(tStart)) 's']);
 
 	%%3. Solving

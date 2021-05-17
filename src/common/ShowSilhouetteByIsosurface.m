@@ -1,4 +1,4 @@
-function hd = VisIsosurface(iMesh)
+function hd = ShowSilhouetteByIsosurface(iMesh)
 	global boundingBox_;
 	global nodeCoords_
 	nx = iMesh.resX;

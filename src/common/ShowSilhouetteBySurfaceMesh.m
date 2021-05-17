@@ -1,4 +1,4 @@
-function hd = VisSurfaceMesh(iMesh)
+function hd = ShowSilhouetteBySurfaceMesh(iMesh)
 	global nodeCoords_;
 	patchIndices = [];
 	patchType = size(iMesh.eNodMat,2);

@@ -10,7 +10,7 @@ function voxelizedVolume = CreateVoxilizedModel(varargin)
 		case 2
 			triFaceModelFile = varargin{1};
 			finestResCtrl = varargin{2};
-			LoadExternalTriangularPolygonMesh_ply(triFaceModelFile);
+			ReadTriangularPolygonMesh_plyFormat(triFaceModelFile);
 			[nelx_, nely_, nelz_, formatedTriMesh_] = AdaptData4Voxelize(finestResCtrl);
 			voxelizedVolume = Voxelize(nelx_, nely_, nelz_, formatedTriMesh_);
 			voxelizedVolume = flip(voxelizedVolume,1);

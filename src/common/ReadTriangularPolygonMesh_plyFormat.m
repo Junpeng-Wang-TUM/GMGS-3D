@@ -1,4 +1,4 @@
-function LoadExternalTriangularPolygonMesh_ply(fileName)
+function ReadTriangularPolygonMesh_plyFormat(fileName)
 	global surfTriMeshStruct_;
 	surfTriMeshStruct_ = MeshStruct();
 

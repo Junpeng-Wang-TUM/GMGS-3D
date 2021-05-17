@@ -1,4 +1,4 @@
-function InitializeSolver()
+function SetupSolver()
 	global meshHierarchy_;
 	global F_; 
 	global Ke0_;
@@ -6,7 +6,7 @@ function InitializeSolver()
 	global cholFac_; global cholPermut_;
 	
 	%%1. initialize system matrix
-	Ke0_ = InitializeElementStiffnessMatrix();
+	Ke0_ = SetupStiffnessMatrix();
 	meshHierarchy_(1).storingState = 0;					
 	meshHierarchy_(1).Ke = Ke0_;
 	meshHierarchy_(1).Ks = meshHierarchy_(1).Ke;	
