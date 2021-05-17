@@ -1,6 +1,6 @@
 %% This script declares some global variables
 %% General control parameters	
-global tol_; tol_ = 1.0e-6; %% convergence tolerance of iterative linear system solver
+global tol_; tol_ = 1.0e-3; %% convergence tolerance of iterative linear system solver
 global maxIT_; maxIT_ = 20000; %% permitted maximum number of iteartion
 global weightFactorJacobi_; weightFactorJacobi_ = 0.4; %% try reducing it in case failing to converge, scope: (0,1)
 
