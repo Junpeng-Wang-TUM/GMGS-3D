@@ -18,7 +18,7 @@ voxelizedVolume_ = CreateVoxilizedModel(triFaceModelFile, finestResolutionContro
 % voxelizedVolume_ = CreateVoxilizedModel(100, 50, 50); %% Create Cuboid for test
 DiscretizeDesignDomain();
 disp(['Creating the Geometrical Model Costs: ' sprintf('%10.3g',toc(tStart)) 's']);
-VisSurfaceMesh(meshHierarchy_);
+ShowSilhouetteBySurfaceMesh(meshHierarchy_);
 
 %%2. Interactively Applying for Boundary Condition (go to directory '../doc/User's Guidance.pdf' for help)
 %%....
