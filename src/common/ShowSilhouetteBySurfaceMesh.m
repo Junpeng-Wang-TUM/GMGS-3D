@@ -26,12 +26,11 @@ function hd = ShowSilhouetteBySurfaceMesh(iMesh)
 	else
 		error('Wrong type of input mesh!');
 	end
-	hd = patch(xPatchs, yPatchs, zPatchs, cPatchs);
-	set(hd, 'FaceColor', [65 174 118]/255, 'FaceAlpha', 1, 'EdgeColor', 'k');	
+	hd = patch(xPatchs, yPatchs, zPatchs, cPatchs); view(3);
+	set(hd, 'FaceColor', [65 174 118]/255, 'FaceAlpha', 1, 'EdgeColor', 'none');	
 	camproj('perspective');
 	axis('on'); axis('equal'); axis('tight');
-	[az, el] = view(3); 
-	% [az, el] = view(-1.623917302580646e+02, 7.357713248192212e+00);
+	[az, el] = view; 
 	lighting('gouraud');
 	camlight(az,el,'infinite');
 	camlight('headlight','infinite');

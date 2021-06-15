@@ -6,7 +6,7 @@ function VisScalarField(scalarField, varargin)
 	
 	if 1==nargin
 		minFeaterSize = min(boundingBox_(2,:)-boundingBox_(1,:)); selfFac = 10;
-		scalingFactor = minFeaterSize/selfFac/max(U_);		
+		scalingFactor = minFeaterSize/selfFac/max(abs(U_));		
 	elseif 2==nargin
 		scalingFactor = varargin{1};
 	else
