@@ -15,7 +15,7 @@ function WrapVoxelFEAmodel()
 	fprintf(fid, '%s %s ', 'fixed position:');
 	fprintf(fid, '%d\n', length(fixingCond_));		
 	if ~isempty(fixingCond_)
-		fprintf(fid, '%d\n', meshHierarchy_(1).nodMapBack(fixingCond_));
+		fprintf(fid, '%d %d %d %d\n', [meshHierarchy_(1).nodMapBack(fixingCond_) ones(length(fixingCond_), 3)]');
 	end
 	fprintf(fid, '%s %s ', 'loading condition:');
 	fprintf(fid, '%d\n', size(loadingCond_,1));
