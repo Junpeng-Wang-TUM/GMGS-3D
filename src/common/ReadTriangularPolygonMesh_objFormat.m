@@ -15,7 +15,8 @@ function ReadTriangularPolygonMesh_objFormat(fileName)
 		end
 	end
 	fclose(fid);
-
+    nodeCoordsTri = nodeCoordsTri(:,[1 3 2]);
+    nodeCoordsTri(:,2) = -nodeCoordsTri(:,2);
 	surfTriMeshStruct_.numNodes = size(nodeCoordsTri,1);
 	surfTriMeshStruct_.nodeCoords = nodeCoordsTri;
 	surfTriMeshStruct_.numElements = size(eNodMatTri,1);

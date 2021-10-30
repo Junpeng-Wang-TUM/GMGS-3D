@@ -10,11 +10,11 @@ function voxelizedVolume = CreateVoxilizedModel(varargin)
 		case 2
 			triFaceModelFile = varargin{1};
 			finestResCtrl = varargin{2};
-			dataType = extractAfter(triFaceModelFile, '.');
+            [~,~,dataType] = fileparts(triFaceModelFile);
 			switch dataType
-				case 'ply'
+				case '.ply'
 					ReadTriangularPolygonMesh_plyFormat(triFaceModelFile);
-				case 'obj'
+				case '.obj'
 					ReadTriangularPolygonMesh_objFormat(triFaceModelFile);
 				otherwise
 					error('Wrong Input!');
