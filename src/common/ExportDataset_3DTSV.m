@@ -8,14 +8,10 @@ function ExportDataset_3DTSV()
 		warning('No Cartesian Stress Available!'); return;
 	end
 	
-	fileName = strcat('../data/dataset_TSV.vtk');
+	fileName = strcat('../data/dataset_TSV.carti');
 	fid = fopen(fileName, 'w');	
 	%%write in economic Cartesian mesh style
-	%%2.1 file header (ignore 'volume mesh' for 2D)
-	fprintf(fid, '%s %s %s %s', '# vtk DataFile Version');
-	fprintf(fid, '%.1f\n', 3.0);
-	fprintf(fid, '%s %s', 'Volume mesh'); fprintf(fid, '\n');
-	fprintf(fid, '%s \n', 'ASCII');
+	%%2.1 file header
 	fprintf(fid, '%s %s', 'DATASET CARTESIAN_GRID'); fprintf(fid, '\n');
 	fprintf(fid, '%s', 'Resolution:');		
 	%%2.2 mesh description
