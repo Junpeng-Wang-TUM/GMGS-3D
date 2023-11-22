@@ -11,7 +11,7 @@ global poissonRatio_; poissonRatio_ = 0.3;	%% Poisson's ratio
 %% Mesh & design domain description
 global surfTriMeshStruct_; %% input triangular surface mesh for voxelizing
 global voxelizedVolume_; voxelizedVolume_ = []; %% voxelized model
-global characteristicSize_; characteristicSize_ = []; %% scalar or 'empty' (==the dimensionality of the bounding box of the voxelized solid object would be nely_ * nelx_ * nelz_)
+global characteristicSize_; characteristicSize_ = []; %% scalar or 'empty' (==the dimensionality of the bounding box of the input model)
 global finestResolutionControl_; finestResolutionControl_ = 128; %% maximum number of elements along a single dimension
 global nelx_; %% mesh resolution = nelx_ * nely_ * nelz_
 global nely_;

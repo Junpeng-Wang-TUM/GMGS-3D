@@ -5,6 +5,7 @@ function voxelizedVolume = CreateVoxilizedModel(varargin)
 	global nelx_;
 	global nely_;
 	global nelz_;
+	global surfTriMeshStruct_;
 	global formatedTriMesh_;
 	switch nargin
 		case 2
@@ -22,6 +23,7 @@ function voxelizedVolume = CreateVoxilizedModel(varargin)
 			[nelx_, nely_, nelz_, formatedTriMesh_] = AdaptData4Voxelize(finestResCtrl);
 			voxelizedVolume = Voxelize(nelx_, nely_, nelz_, formatedTriMesh_);
 			voxelizedVolume = flip(voxelizedVolume,1);
+			boundingBox_ = [min(surfTriMeshStruct_.nodeCoords, [], 1); max(surfTriMeshStruct_.nodeCoords, [], 1)];
 		case 3
 			nelx_ = varargin{1};
 			nely_ = varargin{2};

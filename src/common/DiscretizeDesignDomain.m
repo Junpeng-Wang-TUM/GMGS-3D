@@ -50,8 +50,6 @@ function DiscretizeDesignDomain()
 	end
 
 	%%2. initialize characteristic size
-	boundingBox_(1,:) = [0 0 0]; 
-	boundingBox_(2,:) = boundingBox_(1,:)+[nelx_ nely_ nelz_];
 	if ~isempty(characteristicSize_)
 		boundingBox_(2,:) = boundingBox_(1,:) + (boundingBox_(2,:)-boundingBox_(1,:))/ ...
 			max(boundingBox_(2,:)-boundingBox_(1,:)) * characteristicSize_;
